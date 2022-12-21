@@ -23,9 +23,9 @@ push-image:
     IMAGE_TAG: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
   script:
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
-    - apk add --update npm
-    - apk --no-cache add build-base
-    - apk add --update --no-cache python3
+    - apk add --update --no-cache npm build-base python3 git
+    - git clone https://$CONFIG_TOKEN_USERNAME:$CONFIG_TOKEN_VALUE@gitlab.com/wellfound/devcontainer-images/configuration-files.git
+    - cp ./configuration-files/.pre-commit-config.yaml ./image/.devcontainer/.pre-commit-config.yaml
     - npm install -g @devcontainers/cli
     - devcontainer build --workspace-folder ./image/ --image-name $IMAGE_TAG
     - docker push $IMAGE_TAG
