@@ -1,5 +1,22 @@
 FROM mcr.microsoft.com/devcontainers/go:0-1.17-bullseye
 
+# install preferred development tools
+RUN apt-get update \
+&& apt-get install -y fontconfig
+RUN font_url='https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/FiraCode.zip'; font_name=${font_url##*/}; wget ${font_url} && unzip ${font_name} -d ~/.fonts && fc-cache -fv ;
+RUN apt-get update \
+&& sh -c "$(curl -fsSL https://starship.rs/install.sh)" -- -f \
+&& apt-get install -y ne \
+&& chsh -s /usr/bin/fish
+
+# install gitname
+RUN mkdir -p /usr/local/bin/gitname_install \
+&& cd /usr/local/bin/gitname_install \
+&& wget -O gitname.tar.gz https://github.com/alex-shpak/gitname/releases/download/v5/gitname_5_Linux_x86_64.tar.gz \
+&& tar xzvf gitname.tar.gz --no-same-owner \
+&& cp ./gitname /usr/local/bin \
+&& rm -rf /usr/local/bin/gitname_install
+
 # install pip
 RUN apt-get update && apt-get -y install python3-pip
 
