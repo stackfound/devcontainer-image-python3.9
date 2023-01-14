@@ -6,7 +6,7 @@ RUN apt-get update \
 RUN font_url='https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/FiraCode.zip'; font_name=${font_url##*/}; wget ${font_url} && unzip ${font_name} -d ~/.fonts && fc-cache -fv ;
 RUN apt-get update \
 && sh -c "$(curl -fsSL https://starship.rs/install.sh)" -- -f \
-&& apt-get install -y ne \
+&& apt-get install -y ne figlet \
 && chsh -s /usr/bin/fish
 
 # install gitname
