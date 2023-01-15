@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/devcontainers/go:0-1.17-bullseye
+FROM --platform=linux/arm64 mcr.microsoft.com/devcontainers/go:0-1.17-bullseye
 
 # install preferred development tools
 RUN apt-get update \
