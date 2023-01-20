@@ -4,9 +4,6 @@ FROM --platform=linux/arm64 mcr.microsoft.com/devcontainers/go:0-1.17-bullseye
 RUN apt-get update \
 && apt-get install -y fontconfig
 RUN font_url='https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/FiraCode.zip'; font_name=${font_url##*/}; wget ${font_url} && unzip ${font_name} -d ~/.fonts && fc-cache -fv
-USER vscode
-RUN font_url='https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/FiraCode.zip'; font_name=${font_url##*/}; wget ${font_url} && unzip ${font_name} -d ~/.fonts && fc-cache -fv
-USER root
 RUN apt-get update \
 && sh -c "$(curl -fsSL https://starship.rs/install.sh)" -- -f \
 && apt-get install -y ne figlet nodejs npm \

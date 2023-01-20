@@ -16,6 +16,6 @@
 			"enableNonRootDocker": "true",
 			"moby": "true"
 		}
-    },
-    "remoteUser": "vscode"
+    }
+    // "remoteUser": "vscode"
 }
