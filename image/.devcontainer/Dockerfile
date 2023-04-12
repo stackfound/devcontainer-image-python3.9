@@ -1,4 +1,4 @@
-FROM --platform=linux/arm64 mcr.microsoft.com/devcontainers/go:0-1.17-bullseye
+FROM --platform=linux/arm64 mcr.microsoft.com/devcontainers/go:0-1.18-bullseye
 
 # install preferred development tools
 RUN apt-get update \
@@ -31,7 +31,7 @@ RUN apt-get update && apt-get install -y apt-transport-https ca-certificates cur
 
 # install pre-commit hook environments
 COPY .pre-commit-config.yaml .
-RUN pip install pre-commit==2.20.0 && git init . && pre-commit install-hooks && rm -rf .git
+RUN pip install pre-commit && git config --global --add safe.directory /go && git init . && pre-commit install-hooks && rm -rf .git
 
 # install gitleaks
 RUN wget https://github.com/zricethezav/gitleaks/releases/download/v8.15.2/gitleaks_8.15.2_linux_arm64.tar.gz && tar -xvkf gitleaks_8.15.2_linux_arm64.tar.gz -C /usr/local/bin 
